@@ -4,9 +4,9 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>me.zohar</groupId>
-		<artifactId>lottery</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+  <groupId>org.springframework.boot
+  <artifactId>spring-boot-starter-parent
+  <version>2.1.1.RELEASE
 	</parent>
 	<artifactId>lottery-admin</artifactId>
 	<name>lottery-admin</name>
