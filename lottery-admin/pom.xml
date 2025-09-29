@@ -3,42 +3,32 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0
-
-    <!-- Spring Boot官方父依赖 -->
     <parent>
         <groupId>org.springframework.boot
         <artifactId>spring-boot-starter-parent
         <version>2.1.1.RELEASE
     
-
     <artifactId>lottery-admin
     <name>lottery-admin
     <packaging>jar
-
     <properties>
         <project.build.sourceEncoding>UTF-8
     
-
     <dependencies>
-        <!-- 移除了不存在的me.zohar:lottery-api依赖 -->
-        
         <dependency>
             <groupId>org.springframework.boot
             <artifactId>spring-boot-starter-web
         
-
         <dependency>
             <groupId>org.springframework.boot
             <artifactId>spring-boot-starter-thymeleaf
         
-
         <dependency>
             <groupId>org.springframework.boot
             <artifactId>spring-boot-starter-test
             <scope>test
         
     
-
     <build>
         <plugins>
             <plugin>
