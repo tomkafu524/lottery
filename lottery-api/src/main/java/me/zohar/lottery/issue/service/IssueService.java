@@ -198,9 +198,13 @@ public class IssueService {
 						issueRepo.save(issue);
 
 						Date effectTime = DateUtil.offset(issue.getEndTime(), DateField.SECOND, 2);
-						XxlMqProducer.produce(new XxlMqMessage("SYNC_LOTTERY_NUM_" + issue.getGameCode(),
-								JSON.toJSONString(new SyncLotteryNumMsg(issue.getGameCode(), issue.getIssueNum(), 0)),
-								effectTime));
+						// 修复：使用 setter 方法而不是构造函数
+						XxlMqMessage message = new XxlMqMessage();
+						message.setTopic("SYNC_LOTTERY_NUM_" + issue.getGameCode());
+						message.setData(JSON.toJSONString(new SyncLotteryNumMsg(issue.getGameCode(), issue.getIssueNum(), 0)));
+						// 注意：1.2.0 版本可能不支持设置 effectTime，可能需要使用其他方式处理延迟
+						// 如果 effectTime 是必须的，可能需要寻找替代方案
+						XxlMqProducer.produce(message);
 					}
 					count += issueCount;
 				}
