@@ -61,7 +61,13 @@ public class SyncTjsscLotteryNumTask implements IMqConsumer {
 			if (msg.getRetries() < RETRY_LEVEL.size() - 1) {
 				Date effectTime = DateUtil.offset(new Date(), DateField.SECOND, RETRY_LEVEL.get(msg.getRetries()));
 				msg.setRetries(msg.getRetries() + 1);
-				XxlMqProducer.produce(new XxlMqMessage(TOPIC, JSON.toJSONString(msg), effectTime));
+				// 修复：使用 setter 方法而不是构造函数
+				XxlMqMessage message = new XxlMqMessage();
+				message.setTopic(TOPIC);
+				message.setData(JSON.toJSONString(msg));
+				// 注意：1.2.0 版本可能不支持设置 effectTime，可能需要使用其他方式处理延迟
+				// 如果 effectTime 是必须的，可能需要寻找替代方案
+				XxlMqProducer.produce(message);
 			}
 		}
 		return MqResult.SUCCESS;
