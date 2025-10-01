@@ -43,13 +43,14 @@
     
     <build>
         <plugins>
-            <!-- Spring Boot Maven 插件 -->
+            <!-- 关键：完整的 Spring Boot Maven 插件配置 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 移除版本号，使用父POM中的版本 -->
+                <version>2.7.0</version>
                 <configuration>
-                    <!-- 移除 mainClass 配置，让插件自动检测 -->
+                    <mainClass>me.zohar.lottery.LotteryAdminApplication</mainClass>
+                    <executable>true</executable>
                 </configuration>
                 <executions>
                     <execution>
@@ -60,7 +61,16 @@
                 </executions>
             </plugin>
             
-            <!-- 使用父POM中的编译器插件配置 -->
+            <!-- Maven 编译器插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
