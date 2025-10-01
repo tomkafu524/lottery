@@ -15,8 +15,9 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
     <dependencies>
@@ -42,14 +43,13 @@
     
     <build>
         <plugins>
-            <!-- 关键：Spring Boot Maven 插件 - 生成可执行JAR -->
+            <!-- Spring Boot Maven 插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.0</version> <!-- 根据您的Spring Boot版本调整 -->
+                <!-- 移除版本号，使用父POM中的版本 -->
                 <configuration>
-                    <mainClass>me.zohar.lottery.LotteryAdminApplication</mainClass>
-                    <executable>true</executable>
+                    <!-- 移除 mainClass 配置，让插件自动检测 -->
                 </configuration>
                 <executions>
                     <execution>
@@ -60,37 +60,7 @@
                 </executions>
             </plugin>
             
-            <!-- 确保使用正确的Java版本 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-            
-            <!-- 资源文件处理 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+            <!-- 使用父POM中的编译器插件配置 -->
         </plugins>
-        
-        <!-- 资源文件配置 -->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
