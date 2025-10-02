@@ -3,21 +3,21 @@ server:
 
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://sjc1.clusters.zeabur.com:30478/zeabur}?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:235R7o6nPi8uZDxlEhMk49rSj0zqNyt1}
-    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.zeabur.internal:3306/zeabur?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 235R7o6nPi8uZDxlEhMk49rSj0zqNyt1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: update   # 第一次启动会自动建表，之后建议改成 validate
+
   thymeleaf:
     cache: false
-  # 注释掉 Redis 配置
-  # redis:
-  #   port: 6379
-  #   host: localhost
+
+  # 禁用 Redis，避免在 Zeabur 没有 Redis 时启动报错
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
@@ -28,9 +28,6 @@ jetcache:
     default:
       type: linkedhashmap
       keyConvertor: fastjson
-  # 禁用远程缓存
   remote:
     default:
-      type: none
-
-# 删除无效的 jarfile 配置
+      type: none   # 禁用远程缓存
